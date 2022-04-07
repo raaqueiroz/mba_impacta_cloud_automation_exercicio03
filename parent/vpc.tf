@@ -26,7 +26,7 @@ resource "aws_route_table" "rtb_pub_cloud_automation" {
 
 resource "aws_subnet" "subnet_cloud_automation" {
   vpc_id                = aws_vpc.vpc_cloud_automation.id
-  cidr_block            = var.subnet_cloud_automation
+  cidr_block            = var.subnet_cidr
   availability_zone_id     = data.aws_availability_zones.az1a.zone_ids[0]
 
   tags = var.tags
