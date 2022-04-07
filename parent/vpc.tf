@@ -4,17 +4,13 @@ resource "aws_vpc" "vpc_cloud_automation" {
   enable_dns_support    =   true
   enable_dns_hostnames  =   true
 
-  tags = {
-      Name = "VPCCloudAutomation"
-  }
+  tags = var.tags
 }
 
 resource "aws_internet_gateway" "igw_cloud_automation" {
   vpc_id = aws_vpc.vpc_cloud_automation.id
 
-  tags = {
-      Name = "IGWCloudAutomation"
-  }
+  tags = var.tags
 }
 
 resource "aws_route_table" "rtb_pub_cloud_automation" {
@@ -25,9 +21,7 @@ resource "aws_route_table" "rtb_pub_cloud_automation" {
         gateway_id = aws_internet_gateway.igw_cloud_automation.id
       }  
 
-  tags = {
-      Name = "RTBCloudAutomation"
-  }
+  tags = var.tags
 }
 
 resource "aws_subnet" "subnet_cloud_automation" {
@@ -35,9 +29,7 @@ resource "aws_subnet" "subnet_cloud_automation" {
   cidr_block            = var.subnet_cloud_automation
   availability_zone_id     = data.aws_availability_zones.az1a.zone_ids[0]
 
-  tags = {
-      Name = "SubnetCloudAutomation"
-  }
+  tags = var.tags
 }
 
 resource "aws_route_table_association" "rtb_association_cloud_automation" {
@@ -46,7 +38,7 @@ resource "aws_route_table_association" "rtb_association_cloud_automation" {
 }
 
 resource "aws_security_group" "sg_cloud_automation" {
-  name        = "SGCloudAutomation"
+  name        = "${var.name}-SGCloudAutomation"
   description = "SGCloudAutomation"
   vpc_id      = aws_vpc.vpc_cloud_automation.id
 
@@ -98,7 +90,5 @@ resource "aws_security_group" "sg_cloud_automation" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-      Name = "SGCloudAutomation"
-  }
+  tags = var.tags
 }

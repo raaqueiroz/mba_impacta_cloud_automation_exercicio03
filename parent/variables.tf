@@ -3,7 +3,7 @@ variable "vpc_cidr" {
     default = "172.28.0.0/16"
 }
 
-variable "subnet_cloud_automation" {
+variable "subnet_cidr" {
     type = string
     default = "172.28.0.0/24"
 }
@@ -19,4 +19,8 @@ variable "ec2_type" {
 
 variable "tags" {
     type = map
+}
+
+variable "name" {
+    type = string
 }

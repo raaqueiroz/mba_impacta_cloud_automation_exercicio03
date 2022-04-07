@@ -5,22 +5,22 @@ data "aws_availability_zones" "az1a" {
    }
 }
 
-data "aws_ami" "ubuntu20" {
-  most_recent      = true
-  owners           = ["099720109477"]
+data "aws_ami" "slacko-amazon" {
+ most_recent      = true
+ owners           = ["amazon"]
 
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
+ filter {
+   name   = "name"
+   values = ["amzn2-ami*"]
+ }
+ 
+ filter {
+   name   = "architecture"
+   values = ["x86_64"]
+ }
+ 
+ filter {
+   name   = "virtualization-type"
+   values = ["hvm"]
+ }
 }
